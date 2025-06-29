@@ -1,0 +1,13 @@
+prefix=/Users/kaushikyh/Documents/VSCode/SampleAgenticAI/venv
+exec_prefix=/Users/kaushikyh/Documents/VSCode/SampleAgenticAI/venv
+libdir=/Users/kaushikyh/Documents/VSCode/SampleAgenticAI/venv/lib
+sharedlibdir=/Users/kaushikyh/Documents/VSCode/SampleAgenticAI/venv/lib
+includedir=/Users/kaushikyh/Documents/VSCode/SampleAgenticAI/venv/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
