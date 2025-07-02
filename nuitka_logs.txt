@@ -1,0 +1,108 @@
+(venv) (base) kaushikyh@Kaushiks-MacBook-Pro SampleAgenticAI % nuitka --onefile app.py                          
+Nuitka-Options: Used command line options:
+Nuitka-Options:   --onefile app.py
+Nuitka: Starting Python compilation with:
+Nuitka:   Version '2.7.11' on Python 3.13 (flavor 'Anaconda Python') commercial grade 'not installed'.
+Nuitka-Plugins:anti-bloat: Not including '_bisect' automatically in order to avoid bloat, but this may cause: may slow down by using fallback
+Nuitka-Plugins:anti-bloat: implementation.
+Nuitka-Plugins:anti-bloat: Not including '_json' automatically in order to avoid bloat, but this may cause: may slow down by using fallback
+Nuitka-Plugins:anti-bloat: implementation.
+Nuitka: Completed Python level compilation and optimization.
+Nuitka: Generating source code for C backend compiler.
+Nuitka: Running data composer tool for optimal constant value handling.                                    
+Nuitka: Running C compilation via Scons.
+Nuitka-Scons: Backend C compiler: clang (clang 16.0.0).
+Nuitka-Scons: Backend C linking with 603 files (no progress information available for this stage).
+Nuitka-Scons: Compiled 603 C files using ccache.
+Nuitka-Scons: Cached C files (using ccache) with result 'cache miss': 603
+Nuitka-Plugins:data-files: Included data file 'certifi/cacert.pem' due to package data for 'certifi'.
+Nuitka-Postprocessing: Creating single file from dist folder, this may take a while.
+Nuitka-Onefile: Running bootstrap binary compilation via Scons.
+Nuitka-Onefile: Using compression for onefile payload.
+Nuitka-Onefile: Onefile payload compression ratio (23.95%) size 81151025 to 19433388.   
+Nuitka-Scons: Onefile C compiler: clang (clang 16.0.0).                         
+Nuitka-Scons: Onefile C linking.                
+Nuitka-Scons: Compiled 1 C files using ccache.
+Nuitka-Scons: Cached C files (using ccache) with result 'cache hit': 1
+Nuitka-Onefile: Keeping onefile build directory 'app.onefile-build'.
+Nuitka: Keeping dist folder 'app.dist' for inspection, no need to use it.
+Nuitka: Keeping build directory 'app.build'.
+Nuitka: Created binary that runs on macOS 11.1 (arm64) or higher.
+Nuitka: Successfully created 'app.bin'.
+
+** When running the app.bin **
+(venv) (base) kaushikyh@Kaushiks-MacBook-Pro SampleAgenticAI % ./app.bin
+Traceback (most recent call last):
+  File "/private/var/folders/vx/2tlnbq654rl8nz3cq1x6l4980000gn/T/onefile_11335_1751485140_372902/app.py", line 2, in <module>
+  File "/private/var/folders/vx/2tlnbq654rl8nz3cq1x6l4980000gn/T/onefile_11335_1751485140_372902/langgraph/graph/__init__.py", line 1, in <module langgraph.graph>
+  File "/private/var/folders/vx/2tlnbq654rl8nz3cq1x6l4980000gn/T/onefile_11335_1751485140_372902/langgraph/constants.py", line 6, in <module langgraph.constants>
+  File "/private/var/folders/vx/2tlnbq654rl8nz3cq1x6l4980000gn/T/onefile_11335_1751485140_372902/langgraph/types.py", line 20, in <module langgraph.types>
+  File "/private/var/folders/vx/2tlnbq654rl8nz3cq1x6l4980000gn/T/onefile_11335_1751485140_372902/langchain_core/__init__.py", line 11, in <module langchain_core>
+  File "/private/var/folders/vx/2tlnbq654rl8nz3cq1x6l4980000gn/T/onefile_11335_1751485140_372902/langchain_core/_api/__init__.py", line 63, in __getattr__
+  File "/private/var/folders/vx/2tlnbq654rl8nz3cq1x6l4980000gn/T/onefile_11335_1751485140_372902/langchain_core/_import_utils.py", line 32, in import_attr
+ImportError: module ''langchain_core._api'.'deprecation'' not found
+** Reason **
+Nuitka tries to statically analyze imports to decide what to include in the compiled binary. However, in complex frameworks like LangChain, LangGraph, etc., some modules are dynamically imported, often using importlib or __getattr__.
+Nuitka does not detect these dynamic imports automatically, unless you explicitly tell it.
+** Fix **
+nuitka --onefile app.py \
+  --include-package=langgraph \
+  --include-package=langchain_core \
+  --include-module=langchain_core._api.deprecation
+You can add as many --include-package or --include-module entries as needed to capture all dependencies.
+
+** RUN 2 **
+Nuitka-Options: Used command line options:
+Nuitka-Options:   --onefile app.py --include-package=langgraph --include-package=langchain_core
+Nuitka-Options:   --include-module=langchain_core._api.deprecation
+Nuitka: Starting Python compilation with:
+Nuitka:   Version '2.7.11' on Python 3.13 (flavor 'Anaconda Python') commercial grade 'not installed'.
+Nuitka-Plugins:anti-bloat: Not including '_bisect' automatically in order to avoid bloat, but this may cause: may slow down by using fallback
+Nuitka-Plugins:anti-bloat: implementation.
+Nuitka-Plugins:anti-bloat: Not including '_json' automatically in order to avoid bloat, but this may cause: may slow down by using fallback
+Nuitka-Plugins:anti-bloat: implementation.
+Nuitka: Completed Python level compilation and optimization.
+Nuitka: Generating source code for C backend compiler.
+Nuitka: Running data composer tool for optimal constant value handling.                                            
+Nuitka: Running C compilation via Scons.
+Nuitka-Scons: Backend C compiler: clang (clang 16.0.0).
+Nuitka-Scons: Backend C linking with 701 files (no progress information available for this stage).
+Nuitka-Scons: Compiled 701 C files using ccache.
+Nuitka-Scons: Cached C files (using ccache) with result 'cache hit': 601
+Nuitka-Scons: Cached C files (using ccache) with result 'cache miss': 100
+Nuitka-Plugins:data-files: Included data file 'certifi/cacert.pem' due to package data for 'certifi'.
+Nuitka-Postprocessing: Creating single file from dist folder, this may take a while.
+Nuitka-Onefile: Running bootstrap binary compilation via Scons.
+Nuitka-Onefile: Using compression for onefile payload.
+Nuitka-Onefile: Onefile payload compression ratio (23.73%) size 87658698 to 20800857.   
+Nuitka-Scons: Onefile C compiler: clang (clang 16.0.0).                         
+Nuitka-Scons: Onefile C linking.                
+Nuitka-Scons: Compiled 1 C files using ccache.
+Nuitka-Scons: Cached C files (using ccache) with result 'cache hit': 1
+Nuitka-Onefile: Keeping onefile build directory 'app.onefile-build'.
+Nuitka: Keeping dist folder 'app.dist' for inspection, no need to use it.
+Nuitka: Keeping build directory 'app.build'.
+Nuitka: Created binary that runs on macOS 11.1 (arm64) or higher.
+Nuitka: Successfully created 'app.bin'.
+
+(venv) (base) kaushikyh@Kaushiks-MacBook-Pro SampleAgenticAI % ./app.bin                
+Enter a prompt (or 'exit' to quit): how is the weather today ?
+Query: how is the weather today ?
+Category: General
+Sentiment: Neutral
+
+Response: Okay, here are a few general support responses you can use to answer the question "How is the weather today?":
+
+**Option 1 (Short & Sweet):**
+"The weather today is [Weather Condition - e.g., sunny and warm, rainy, cloudy].  Would you like me to tell you more about it?"
+**Option 2 (More Detailed - if you have access to a weather API):**
+"Today's weather is [Weather Condition - e.g., partly cloudy with a high of 75 degrees Fahrenheit].  [Optional: Add a link to a weather website like AccuWeather or Weather.com].  Would you like to know more, like the forecast for a specific location?"
+**Option 3 (Friendly & Helpful):**
+"Hi there!  Today's weather is [Weather Condition - e.g., beautiful and breezy].  It's [brief description - e.g., a lovely day for a walk].  You can check the full forecast here: [Link to weather website]."
+**Option 4 (Simple & Direct):**
+"It's [Weather Condition - e.g., rainy] today."
+---
+**To help me tailor the response even better, could you tell me:**
+*   **What kind of system are you using?** (e.g., a chatbot, a helpdesk, a website?)
+Enter a prompt (or 'exit' to quit): exit
+Exiting program.
